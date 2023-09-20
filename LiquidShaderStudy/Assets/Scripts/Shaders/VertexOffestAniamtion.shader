@@ -4,7 +4,7 @@ Shader "Unlit/VertexOffestAniamtion"
     {
         [NoScaleOffset] MainTex ("Texture", 2D) = "white" {}
         _colorChange ("Color", Color) = (1,1,1,1)
-        _waveAmp ("Wave Amp", Range(0, 0.5)) = 0.2 
+        _WaveAmp ("Wave Amp", Range(0, 0.5)) = 0.2 
     }
     SubShader
     {
@@ -16,9 +16,11 @@ Shader "Unlit/VertexOffestAniamtion"
             #pragma vertex vert
             #pragma fragment frag
 
+            #define TAU 6.283185307 
+
             #include "UnityCG.cginc"
 
-            float _waveAmp;
+            float _WaveAmp;
             sampler2D _MainTex;
             float4 _colorChange;
 
@@ -40,6 +42,11 @@ Shader "Unlit/VertexOffestAniamtion"
             Interpolators vert ( MeshData v )
             {
                 Interpolators o;
+
+                //Vertex offsets
+                float wave = cos( ( v.uv0.y + _Time.y * 0.1 ) * TAU * 5) - 0.5;
+                v.vertex.y = wave * _WaveAmp;
+
 
                 o.vertex = UnityObjectToClipPos( v.vertex );
                 o.normal = UnityObjectToWorldNormal( v.normals );
