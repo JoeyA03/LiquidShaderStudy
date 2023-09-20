@@ -2,13 +2,16 @@ Shader "Unlit/VertexOffestAniamtion"
 {
     Properties
     {
-        [NoScaleOffset] MainTex ("Texture", 2D) = "white" {}
+        // [NoScaleOffset] MainTex ("Texture", 2D) = "white" {}
         _colorChange ("Color", Color) = (1,1,1,1)
         _WaveAmp ("Wave Amp", Range(0, 0.5)) = 0.2 
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags 
+        { 
+            "RenderType"="Opaque"
+        }
 
         Pass
         {
@@ -50,6 +53,7 @@ Shader "Unlit/VertexOffestAniamtion"
 
                 o.vertex = UnityObjectToClipPos( v.vertex );
                 o.normal = UnityObjectToWorldNormal( v.normals );
+                o.uv = v.uv0;
                 
                 return o;
             }
@@ -57,12 +61,13 @@ Shader "Unlit/VertexOffestAniamtion"
             fixed4 frag (Interpolators i) : SV_Target
             {
                 // fixed4 col = tex2D(_MainTex, i.uv);
-                fixed4 uv = fixed4(i.uv, 0, 1);
+                float t = float4( cos( ( i.uv.y + cos( i.uv.y * TAU * 8) * 0.01 +_Time.y * 0.1 ) * TAU * 5) *0.5 + 0.5, 0, 0, 1 );
+                t *= 1-i.uv.y; 
 
-                return _colorChange;
-
-                return float4( i.uv, 0, 1 );
+                return t;
             }
+
+
             ENDCG
         }
     }
