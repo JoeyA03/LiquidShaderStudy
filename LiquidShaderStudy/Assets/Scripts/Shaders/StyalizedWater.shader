@@ -35,20 +35,6 @@ Shader "Unlit/StyalizedWater"
 
             #include "UnityCG.cginc"
 
-            struct MeshData
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            struct Interpolators
-            {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
-                float4 scrPos : TEXCOORD2;
-                float4 worldPos : TEXCOORD4;
-            };
-
             sampler2D _CameraDepthTexture; 
             sampler2D _MaskInt; 
             sampler2D _MainTex, _NoiseTex;
@@ -62,6 +48,19 @@ Shader "Unlit/StyalizedWater"
             uniform sampler2D _GlobalEffectRT;
             uniform float _OrthographicCamSize;
 
+            struct MeshData
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct Interpolators
+            {
+                float2 uv : TEXCOORD3;
+                float4 vertex : SV_POSITION;
+                float4 scrPos : TEXCOORD2;
+                float4 worldPos : TEXCOORD4;
+            };
 
             Interpolators vert (MeshData v)
             {
@@ -75,7 +74,6 @@ Shader "Unlit/StyalizedWater"
 
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.scrPos = ComputeScreenPos(o.vertex);  
-                //UNITY_TRANSFER_FOG(o,o.vertex);  
                 return o;
             }
 
@@ -84,8 +82,8 @@ Shader "Unlit/StyalizedWater"
                 
                 //renderTexture UV
                 float2 uv = i.worldPos.xz - _Position.xz;
-                //uv = uv/(_OrthographicCamSize * 2) + 0.5;
-                //uv += 0.5;
+                uv = uv/(_OrthographicCamSize * 2) + 0.5;
+                uv += 0.5;
 
                 // Ripples
                 float ripples = tex2D(_GlobalEffectRT, uv).b;
@@ -95,7 +93,7 @@ Shader "Unlit/StyalizedWater"
                 ripples *= mask.a;
 
                 //fixed distortx = tex2D(_NoiseTex, (i.worldPos.xz * _Scale)  + (_Time.z * 2)).r;// distortion 
-                fixed distortx = tex2D(_NoiseTex, (i.worldPos.xz - _Time.z).r);// distortion 
+                fixed distortx = tex2D(_NoiseTex, (i.worldPos.xz * _Scale)  + (_Time.x * 2)).r;// distortion 
                 distortx +=  (ripples * 2);
 
                 //half4 col = tex2D(_MainTex, (i.worldPos.xz * _Scale) - (distortx * _TextureDistort));// texture times tint;   
