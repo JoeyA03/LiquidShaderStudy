@@ -56,7 +56,7 @@ Shader "Unlit/StyalizedWater"
 
             struct Interpolators
             {
-                float2 uv : TEXCOORD3;
+                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
                 float4 scrPos : TEXCOORD2;
                 float4 worldPos : TEXCOORD4;
@@ -67,7 +67,7 @@ Shader "Unlit/StyalizedWater"
                 Interpolators o;
                 UNITY_INITIALIZE_OUTPUT(Interpolators, o);
                 float4 tex = tex2Dlod(_NoiseTex, float4(v.uv.xy, 0, 0));
-                v.vertex.y += sin(_Time.y * _Speed + (v.vertex.x * v.vertex.z * _Amount * tex)) * _Height; 
+                v.vertex.y += sin(_Time.y * _Speed + (v.vertex.x * v.vertex.z * _Amount * tex)) * _Height;  //Setting the vertex animation for wave sim
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex);
@@ -82,7 +82,7 @@ Shader "Unlit/StyalizedWater"
                 
                 //renderTexture UV
                 float2 uv = i.worldPos.xz - _Position.xz;
-                uv = uv/(_OrthographicCamSize * 2) + 0.5;
+                uv = uv/(_OrthographicCamSize * 2);
                 uv += 0.5;
 
                 // Ripples
@@ -101,12 +101,11 @@ Shader "Unlit/StyalizedWater"
                 //half4 col = tex2D( _MainTex, (i.uv* _Scale) - (distortx * _TextureDistort));
                 half4 col = tex2D( _MainTex, (i.worldPos.xz * _Scale) - (distortx * _TextureDistort) );
 
-
                 half depth = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.scrPos))); // depth
                 half4 foamLine = 1 - saturate(_Foam * (depth - i.scrPos.w ) ); // foam line by comparing depth and screenposition
 
                 col *= _Color;
-                col += (step(0.2 * distortx,foamLine) * _FoamC); // add the foam line and tint to the texture
+                col += (step(0.4 * distortx,foamLine) * _FoamC); // add the foam line and tint to the texture
                 col = saturate(col) * col.a;
 
                 ripples = step(0.99, ripples * 3);
@@ -114,7 +113,7 @@ Shader "Unlit/StyalizedWater"
                     
                 //return saturate(col);
                 return saturate(col + ripplesColored);
-
+                //return ripples;
             }
             ENDCG                   
         }
