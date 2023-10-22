@@ -109,11 +109,13 @@ Shader "Unlit/StyalizedWater"
                 col = saturate(col) * col.a;
 
                 ripples = step(0.99, ripples * 3);
+                return col + ripples;
+
                 float4 ripplesColored = ripples * _FoamC;
                     
                 //return saturate(col);
                 return saturate(col + ripplesColored);
-                //return ripples;
+                
             }
             ENDCG                   
         }
