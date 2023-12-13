@@ -3,10 +3,13 @@ Shader "Unlit/BottleShader1"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Color ("Color", Color) = (1,1,1, .5)
+        _NoiseTex ("Extra Wave Noise", 2D) = "white" {}_Color ("Color", Color) = (1,1,1, .5)
+
         _PlaneMask ("planeMask",Range(0, 1)) = 1
         _PlanePosition ("PlanePosition", Vector) = (0, 0, 0, 1)
         _PlaneNormal ("PlaneNormal", Vector) = (0, 1, 0, 0)
+
+      
     }
     SubShader
     {
@@ -75,10 +78,11 @@ Shader "Unlit/BottleShader1"
             Interpolators vert (MeshData v)
             {
                 Interpolators o;
+                
+                
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex); // get the world position of the model
-
                 o.uv = v.uv;
 
                 // float distance = dot(o.vertex - _PlanePosition, _PlaneNormal);
@@ -128,6 +132,7 @@ Shader "Unlit/BottleShader1"
             float4 _Plane;
 
 
+
             
 
             struct MeshData
@@ -167,6 +172,7 @@ Shader "Unlit/BottleShader1"
             Interpolators vert (MeshData v)
             {
                 Interpolators o;
+
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 

@@ -7,14 +7,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BottleShader 1
-  m_Shader: {fileID: 4800000, guid: 39af3fc72cc8b794ba3fa4945755535b, type: 3}
+  m_Name: FakeLiquid
+  m_Shader: {fileID: 4800000, guid: f97c0d49aa73eeb469e419f993bf801a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -41,15 +41,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NoiseTex:
-        m_Texture: {fileID: 2800000, guid: f10861713943d7f45a849f90e01cbcc9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -62,30 +58,32 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amount: 0.232
+    - _Amplitude: 0.075
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Freq: 3.46
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Height: 0.005
+    - _Line: 0.0254
+    - _LineSmooth: 0.0586
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PlaneMask: 0
+    - _RimPower: 1.92
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.019103786, g: 0.254717, b: 0, a: 0.36862746}
-    - _CutColor: {r: 0, g: 0, b: 1, a: 0.15686275}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlaneNormal: {r: 0.003320231, g: 0.99999386, b: 0.0011065279, a: 0}
-    - _PlanePosition: {r: -0.23383778, g: 0.2062428, b: -4.678179, a: 0}
+    - _FoamColor: {r: 1, g: 0.4669811, b: 0.4669811, a: 1}
+    - _RimColor: {r: 0.05206478, g: 0.735849, b: 0.27999282, a: 1}
+    - _Tint: {r: 1, g: 0.12156858, b: 0, a: 0.72156864}
+    - _TopColor: {r: 1, g: 0.121568635, b: 0, a: 0.72156864}
   m_BuildTextureStacks: []
