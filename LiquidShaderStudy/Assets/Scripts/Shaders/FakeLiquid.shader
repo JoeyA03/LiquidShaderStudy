@@ -36,14 +36,14 @@ Shader "Unlit/FX/Liquid"
             
             #include "UnityCG.cginc"
             
-            struct appdata
+            struct MeshData
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : NORMAL; 
             };
             
-            struct v2f
+            struct Interpolators
             {
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
@@ -82,9 +82,9 @@ Shader "Unlit/FX/Liquid"
             }
  
  
-            v2f vert (appdata v)
+            Interpolators vert (MeshData v)
             {
-                v2f o;
+                Interpolators o;
  
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
@@ -106,7 +106,7 @@ Shader "Unlit/FX/Liquid"
                 return o;
             }
             
-            fixed4 frag (v2f i, fixed facing : VFACE) : SV_Target
+            fixed4 frag (Interpolators i, fixed facing : VFACE) : SV_Target
             {          
                 float3 worldNormal = mul( unity_ObjectToWorld, float4( i.normal, 0.0 ) ).xyz;
                 // rim light              
