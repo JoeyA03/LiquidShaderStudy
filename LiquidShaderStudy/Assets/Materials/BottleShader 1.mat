@@ -69,16 +69,16 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PlaneMask: 1
+    - _PlaneMask: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.051886797, b: 0.051886797, a: 1}
     - _CutColor: {r: 0, g: 0, b: 1, a: 0.15686275}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlaneNormal: {r: 0.29, g: 1, b: 0, a: 0}
-    - _PlanePosition: {r: 0.84, g: 0.4, b: 0, a: 1}
+    - _PlaneNormal: {r: -0, g: -0, b: -1, a: 0}
+    - _PlanePosition: {r: 0, g: 1.015, b: -4.437, a: 0}
   m_BuildTextureStacks: []
