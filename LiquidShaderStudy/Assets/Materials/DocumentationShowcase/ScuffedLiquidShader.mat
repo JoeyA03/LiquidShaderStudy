@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BottleShaderUnlit
-  m_Shader: {fileID: 4800000, guid: 6777fed4883c6c746a9143a0a5f84813, type: 3}
+  m_Name: ScuffedLiquidShader
+  m_Shader: {fileID: 4800000, guid: 9b9a5bb4eb97df7428406b2a1f9af114, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -69,15 +69,15 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PlaneMask: 1
+    - _PlaneMask: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.48584896, b: 0.48584896, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlaneNormal: {r: 0, g: 1, b: 0, a: 0}
-    - _PlanePosition: {r: 0, g: 0, b: 0, a: 1}
+    - _PlaneNormal: {r: -0.0047143465, g: 0.9999621, b: -0.0073188413, a: 0}
+    - _PlanePosition: {r: -0.2959549, g: 0.17231655, b: 0.019149855, a: 0}
   m_BuildTextureStacks: []

@@ -153,7 +153,7 @@ Shader "Unlit/BottleShader"
                 float4 col = _Color;
                 clip(-distance);
                 
-                return col;
+                return lineMask;
                 // return i.uv.y;
             }
             ENDCG
