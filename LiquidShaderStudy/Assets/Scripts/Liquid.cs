@@ -43,6 +43,10 @@ public class Liquid : MonoBehaviour
     {
         GetMeshAndRend();
     }
+    void Awake()
+    {
+        GetMeshAndRend();
+    }
  
     private void OnValidate()
     {

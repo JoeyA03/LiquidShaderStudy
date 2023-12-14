@@ -89,7 +89,7 @@ Material:
     - _NoiseScale: 0.044
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Scale: 0.536
+    - _Scale: 0.332
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0.71
